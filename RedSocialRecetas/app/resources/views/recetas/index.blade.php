@@ -1,11 +1,15 @@
-<h1>Recetas</h1>
-@foreach($recetas as $receta)
+@extends('layouts.app')
 
-    <li>{{$receta}}</li>
-@endforeach
+@section('content')
+    <h1>Recetas</h1>
+    @foreach($recetas as $receta)
 
-<h2>Categorias</h2>
-@foreach($categorias as $categoria)
+        <li>{{$receta}}</li>
+    @endforeach
 
-    <li>{{$categoria}}</li>
-@endforeach
+    <h2>Categorias</h2>
+    @foreach($categorias as $categoria)
+
+        <li>{{$categoria}}</li>
+    @endforeach
+@endsection

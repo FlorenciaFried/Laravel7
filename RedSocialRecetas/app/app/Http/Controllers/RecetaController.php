@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Receta;
+use App\CategoriaReceta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,9 @@ class RecetaController extends Controller
      */
     public function index()
     {
-        return view('recetas.index');
+        $recetas = Auth::user()->recetas;
+
+        return view('recetas.index')->with('recetas', $recetas);
     }
 
     /**
@@ -33,8 +36,9 @@ class RecetaController extends Controller
      */
     public function create()
     {
-        $categorias = DB::table('categoria_receta')->get()->pluck('nombre', 'id');
+        //$categorias = DB::table('categoria_recetas')->get()->pluck('nombre', 'id');
 
+        $categorias = CategoriaReceta::all(['id', 'nombre']);
         return view('recetas.create')->with('categorias', $categorias);
     }
 
@@ -61,12 +65,21 @@ class RecetaController extends Controller
         $img = Image::make(public_path("storage/{$ruta_imagen}"))->fit(1000, 550);
         $img->save();
 
-        DB::table('recetas')->insert([
+        /*DB::table('recetas')->insert([
             'titulo' => $data['titulo'],
             'preparacion' => $data['preparacion'],
             'ingredientes' => $data['ingredientes'],
             'imagen' => $ruta_imagen,
             'user_id' => Auth::user()->id,
+            'categoria_id' => $data['categoria'],
+        ]);*/
+
+        //Almacenar en la BD con Modelos
+        auth()->user()->recetas()->create([
+            'titulo' => $data['titulo'],
+            'preparacion' => $data['preparacion'],
+            'ingredientes' => $data['ingredientes'],
+            'imagen' => $ruta_imagen,
             'categoria_id' => $data['categoria'],
         ]);
 

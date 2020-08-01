@@ -21,15 +21,11 @@ class UsuarioSeeder extends Seeder
             'url' => 'http://codigoconflor.com',
         ]);
 
-        $user0->perfil()->create();
-
         $user1 = User::create([
             'name' => 'Nombre1',
             'email' => 'correo1@correo.com',
             'password' => Hash::make('12345678'),
             'url' => 'http://codigoconflor.com',
         ]);
-
-        $user1->perfil()->create();
     }
 }

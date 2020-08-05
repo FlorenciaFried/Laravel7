@@ -29,6 +29,7 @@ Vue.component(
     "eliminar-receta",
     require("./components/EliminarReceta.vue").default
 );
+Vue.component("like-button", require("./components/LikeButton.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -38,4 +39,8 @@ Vue.component(
 
 const app = new Vue({
     el: "#app"
+});
+
+$(".like-btn").on("click", function() {
+    $(this).toggleClass("like-active");
 });

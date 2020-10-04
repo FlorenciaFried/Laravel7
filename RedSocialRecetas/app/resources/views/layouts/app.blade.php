@@ -85,8 +85,6 @@
       </div>
     </nav>
 
-    {{ $categorias }}
-
     <div class="container">
       <div class="row">
         <div class="py-4 mt-2 col-12">
